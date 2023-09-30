@@ -33,6 +33,7 @@ class Followers:
         try:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
+                print(f"Page loaded for user: {usersInfo}")
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 120)
@@ -42,6 +43,7 @@ class Followers:
                 photos and videos from xxx (@xxx)">
                 """
                 getDescriptionElement = "meta[property='og:description']"
+                print(f"Waiting for element: {getDescriptionElement}")
                 getDescriptionTag = wait.until(
                     ec.presence_of_element_located(
                         (By.CSS_SELECTOR, getDescriptionElement)))
@@ -66,6 +68,7 @@ class Followers:
                 <meta property="og:title" content="xxx(@xxx) • Instagram photos and videos">
                 """
                 getTitleElement = "meta[property='og:title']"
+                print(f"Waiting for element: {getTitleElement}")
                 getTitleTag = wait.until(
                     ec.presence_of_element_located(
                         (By.CSS_SELECTOR, getTitleElement)))
@@ -85,9 +88,7 @@ class Followers:
             self.saveToJson(resultsList)
 
         except Exception as e:
-            print(f"Error processing users: {e}")
-            raise ValueError(
-                f"Couldn't retrieve information for {intagramList}: {e}")
+            raise ValueError(f"Couldn't retrieve information for {intagramList}: {e}")
 
         finally:
             initializeDriver.quit()
