@@ -1,31 +1,32 @@
-name: Flat
+# Github Workflows that run the main.py every hour.
+# Then commit the changes of ./data folders push back to remote
+name: followers-tracker
 
 on:
-  push:
-    paths:
-      - .github/workflows/flat.yml
-  workflow_dispatch:
-  schedule:
-    - cron: '0-0 0-0 0-0 ? * * *'
+    push:
+        branches:
+            - master
+    schedule:
+        - cron: "0 0 12 1 * ?"
 
 jobs:
-  scheduled:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repo
-        uses: actions/checkout@v2
-
-      - name: Setup deno
-        uses: denoland/setup-deno@main
-        with:
-          deno-version: v1.x
-
-      - name: Run Python script
-        run: |
-          python followers.py
-
-      - name: Fetch data 
-        uses: githubocto/flat@v3
-        with:
-          http_url: /data.json
-          downloaded_filename: data.json
+    price-tracker:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-python@v4
+              with:
+                python-version: '3.8'
+                cache: 'pip' # caching pip dependencies
+            - run: pip install -r requirements.txt
+            - name: Pulling API progress
+              run: |
+                  export PYTHONPATH=.:$PYTHONPATH
+                  python3 ./followers.py
+            - name: Patching changes progress
+              run: |
+                  now=`date`
+                  git config --global user.name taurus5650
+                  git add .
+                  git commit -m "[bot] patching progress at ${now}" || echo 'Nothing to commit'
+                  git push || echo 'Nothing to push'
