@@ -12,7 +12,8 @@ class Followers:
 
     def initializeDriver(self):
         options = uc.ChromeOptions()
-        options.add_argument("--headless")
+        options.add_argument("--window-size=1920x1080")
+        # options.add_argument("--headless")
         chromeVersion = "0.6.2"
         chromeDriverPath = f"/path/to/chromedriver_{chromeVersion}"
         service = Service(chromeDriverPath)
