@@ -49,6 +49,7 @@ class Followers:
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
+                initializeDriver.execute_script("return document.readyState == 'complete'")
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
