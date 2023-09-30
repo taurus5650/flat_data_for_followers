@@ -64,5 +64,35 @@
         "followers": 227000000,
         "following": 660,
         "posts": 6
+    },
+    {
+        "name": "Coldplay (@coldplay)",
+        "followers": 25000000,
+        "following": 63,
+        "posts": 2
+    },
+    {
+        "name": "Nick Jonas (@nickjonas)",
+        "followers": 36000000,
+        "following": 509,
+        "posts": 2
+    },
+    {
+        "name": "50 Cent (@50cent)",
+        "followers": 30000000,
+        "following": 230,
+        "posts": 308
+    },
+    {
+        "name": "Ariana Grande (@arianagrande)",
+        "followers": 380000000,
+        "following": 623,
+        "posts": 121
+    },
+    {
+        "name": "DUA LIPA (@dualipa)",
+        "followers": 89000000,
+        "following": 1,
+        "posts": 1
     }
 ]

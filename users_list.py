@@ -13,5 +13,10 @@ class UserList:
             "billieeilish",
             "badgalriri",
             "nickiminaj",
+            "coldplay",
+            "nickjonas",
+            "50cent",
+            "arianagrande",
+            "dualipa"
         ]
         return instagramUsersList
