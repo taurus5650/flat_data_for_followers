@@ -1,5 +1,7 @@
 import undetected_chromedriver as uc
+from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,18 +14,11 @@ class Followers:
 
     def initializeDriver(self):
         options = uc.ChromeOptions()
-        options.add_argument("--headless")  # Run Chrome in headless mode
-
-        # Specify the version of ChromeDriver that is compatible with your
-        # system
-        chromeVersion = "0.6.2"  # Replace with the actual version
+        options.add_argument("--headless")
+        chromeVersion = "0.6.2"
         chromeDriverPath = f"/path/to/chromedriver_{chromeVersion}"
-
-        # Create the ChromeDriver service
         service = Service(chromeDriverPath)
-
         driver = uc.Chrome(service=service, options=options)
-
         return driver
 
     def saveToJson(self, resultsList):
