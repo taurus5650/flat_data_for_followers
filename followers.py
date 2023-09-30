@@ -1,4 +1,5 @@
 import json
+import re
 import platform
 import time
 
@@ -29,6 +30,16 @@ class Followers:
         with open('data.json', 'w', encoding='utf-8') as json_file:
             json.dump(resultsList, json_file, ensure_ascii=False, indent=4)
 
+    def convert_to_numeric(self, value_str):
+        # Use regular expression to extract numeric values and suffixes (e.g., K, M)
+        match = re.match(r'(\d+(\.\d+)?)\s*([KkMm]*)', value_str)
+        if match:
+            value, _, suffix = match.groups()
+            multiplier = {'k': 1000, 'm': 1000000}.get(suffix.lower(), 1)
+            return int(float(value) * multiplier)
+        else:
+            return int(value_str)
+
     def getUserInfo(self):
         initializeDriver = self.initializeDriver()
         usersList = UserList()
@@ -42,11 +53,7 @@ class Followers:
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
-                """
-                og:description
-                <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
-                photos and videos from xxx (@xxx)">
-                """
+
                 getDescriptionElement = "meta[property='og:description']"
                 print(f"Waiting for element: {getDescriptionElement}")
                 getDescriptionTag = wait.until(
@@ -54,25 +61,11 @@ class Followers:
                         (By.CSS_SELECTOR, getDescriptionElement)))
                 print(f"{getDescriptionTag}")
                 getContent = getDescriptionTag.get_attribute("content")
-                """
-                getContent.split(", ") = When ", ", then do split
-                ---
-                followers, following, posts example
-                stats = ["40K Followers, 138 Following, 32 Posts", "1.5M Followers, 500 Following, 200 Posts"]
-                cleaned_stats = list(map(str.strip, [stat.split(" ")[0] for stat in stats]))
-                for result in cleaned_stats:
-                    print(result)
-                # 40K Followers, 138 Following, 32 Posts
-                # 1.5M Followers, 500 Following, 200 Posts
-                """
+
                 stats = getContent.split(", ")
                 followers, following, posts = map(
-                    str.strip, [stat.split(" ")[0] for stat in stats])
+                    self.convert_to_numeric, [stat.split(" ")[0] for stat in stats])
 
-                """
-                og:title
-                <meta property="og:title" content="xxx(@xxx) • Instagram photos and videos">
-                """
                 getTitleElement = "meta[property='og:title']"
                 print(f"Waiting for element: {getTitleElement}")
                 getTitleTag = wait.until(
