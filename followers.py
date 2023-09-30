@@ -6,15 +6,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from users_list import UserList
 import json
+import platform
 
 
 class Followers:
 
     def initializeDriver(self):
         options = uc.ChromeOptions()
-        options.add_argument("--window-size=1920x1080")
         options.add_argument("--headless")
-        chromeVersion = "0.6.2"
+        options.add_argument(
+            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+
+        chromeVersion = "91.0.4472.124"
         chromeDriverPath = f"/path/to/chromedriver_{chromeVersion}"
         service = Service(chromeDriverPath)
         driver = uc.Chrome(service=service, options=options)
@@ -36,7 +39,7 @@ class Followers:
                 print(f"Page loaded for user: {usersInfo}")
 
                 # Wait for the element to be present
-                wait = WebDriverWait(initializeDriver, 300)
+                wait = WebDriverWait(initializeDriver, 30)
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
@@ -99,3 +102,4 @@ class Followers:
 if __name__ == "__main__":
     followers = Followers()
     followers.getUserInfo()
+    print(platform.platform())
