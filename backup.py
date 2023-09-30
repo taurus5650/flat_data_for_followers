@@ -38,7 +38,6 @@ class Followers:
         try:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
-                print(initializeDriver.execute_script("return navigator.userAgent;"))
                 print(f"Page loaded for user: {usersInfo}")
 
                 # Wait for the element to be present

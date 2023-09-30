@@ -36,6 +36,7 @@ class Followers:
         resultsList = []
 
         initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
+        print(initializeDriver.execute_script("return navigator.userAgent;"))
         html_source = initializeDriver.page_source
         with open("page_source.html", "w", encoding="utf-8") as file:
             file.write(html_source)
