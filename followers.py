@@ -1,7 +1,6 @@
 import json
 import platform
 import time
-import requests
 
 from selenium import webdriver
 import undetected_chromedriver as uc
@@ -36,27 +35,6 @@ class Followers:
         intagramList = usersList.instagramUsersList()
         resultsList = []
 
-        initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
-
-
-        # Make a GET request
-        response = requests.get('https://www.instagram.com/cheer_groupies')
-
-        # Check the status code
-        status_code = response.status_code
-        print(f'Status Code: {status_code}')
-
-        # Check if the request was successful (status code 200)
-        if response.status_code == 200:
-            print('Request was successful')
-        else:
-            print('Request was not successful')
-
-        print(initializeDriver.execute_script("return navigator.userAgent;"))
-        html_source = initializeDriver.page_source
-        with open("page_source.html", "w", encoding="utf-8") as file:
-            file.write(html_source)
-
         try:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
@@ -69,11 +47,11 @@ class Followers:
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
                 photos and videos from xxx (@xxx)">
                 """
-                # getDescriptionElement = "meta[property='og:description']"
-                # print(f"Waiting for element: {getDescriptionElement}")
+                getDescriptionElement = "meta[property='og:description']"
+                print(f"Waiting for element: {getDescriptionElement}")
                 getDescriptionTag = wait.until(
                     ec.presence_of_element_located(
-                        (By.XPATH, "//meta[@property='og:description']")))
+                        (By.CSS_SELECTOR, getDescriptionElement)))
                 print(f"{getDescriptionTag}")
                 getContent = getDescriptionTag.get_attribute("content")
                 """
@@ -95,11 +73,11 @@ class Followers:
                 og:title
                 <meta property="og:title" content="xxx(@xxx) • Instagram photos and videos">
                 """
-                # getTitleElement = "meta[property='og:title']"
-                # print(f"Waiting for element: {getTitleElement}")
+                getTitleElement = "meta[property='og:title']"
+                print(f"Waiting for element: {getTitleElement}")
                 getTitleTag = wait.until(
                     ec.presence_of_element_located(
-                        (By.XPATH, "//meta[@property='og:title']")))
+                        (By.CSS_SELECTOR, getTitleElement)))
                 name = getTitleTag.get_attribute(
                     "content").split("•")[0].strip()
 
