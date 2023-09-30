@@ -37,7 +37,8 @@ class Followers:
 
         initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
         html_source = initializeDriver.page_source
-        print(html_source)
+        with open("page_source.html", "w", encoding="utf-8") as file:
+            file.write(html_source)
 
         try:
             for usersInfo in intagramList:

@@ -36,11 +36,6 @@ jobs:
         run: |
           source venv/bin/activate
           python3 -m followers --debug
-      - name: Archive HTML as artifact
-        uses: actions/upload-artifact@v2
-        with:
-            name: html-artifact
-            path: ./file.html
       - name: Upload generated results
         uses: actions/upload-artifact@v3
         with:
