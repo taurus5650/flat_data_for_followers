@@ -2,8 +2,8 @@
 class UserList:
     def instagramUsersList(self):
         instagramUsersList = [
-            "cheer_groupies",
             "sodagreen_aka_oaeen",
+            "cheer_groupies",
             "imqingfeng",
             "wenfang_",
             "chua.tanya",
