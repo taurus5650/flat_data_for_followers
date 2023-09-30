@@ -28,9 +28,9 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m venv venv
-          . venv/bin/activate
-          python -m pip install --upgrade pip
-          python -m pip install -r requirements.txt
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
       - name: Check Installed Modules
         run: pip3 list
       - name: Pulling API progress
