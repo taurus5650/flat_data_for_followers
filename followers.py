@@ -1,7 +1,5 @@
 import undetected_chromedriver as uc
-from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
@@ -36,7 +34,7 @@ class Followers:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
 
                 # Wait for the element to be present
-                wait = WebDriverWait(initializeDriver, 60)
+                wait = WebDriverWait(initializeDriver, 120)
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
@@ -86,6 +84,7 @@ class Followers:
             self.saveToJson(resultsList)
 
         except Exception as e:
+            print(f"Error processing users: {e}")
             raise ValueError(
                 f"Couldn't retrieve information for {intagramList}: {e}")
 
