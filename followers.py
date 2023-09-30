@@ -35,6 +35,7 @@ class Followers:
         intagramList = usersList.instagramUsersList()
         resultsList = []
 
+        print(initializeDriver.execute_script("return navigator.userAgent;"))
         initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
         print(initializeDriver.execute_script("return navigator.userAgent;"))
         html_source = initializeDriver.page_source
