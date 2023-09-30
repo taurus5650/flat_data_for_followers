@@ -30,7 +30,7 @@ class Followers:
         with open('data.json', 'w', encoding='utf-8') as json_file:
             json.dump(resultsList, json_file, ensure_ascii=False, indent=4)
 
-    def convert_to_numeric(self, value_str):
+    def convertToNumeric(self, value_str):
         # Use regular expression to extract numeric values and suffixes (e.g., K, M)
         match = re.match(r'(\d+(\.\d+)?)\s*([KkMm]*)', value_str)
         if match:
@@ -64,7 +64,7 @@ class Followers:
 
                 stats = getContent.split(", ")
                 followers, following, posts = map(
-                    self.convert_to_numeric, [stat.split(" ")[0] for stat in stats])
+                    self.convertToNumeric(), [stat.split(" ")[0] for stat in stats])
 
                 getTitleElement = "meta[property='og:title']"
                 print(f"Waiting for element: {getTitleElement}")
