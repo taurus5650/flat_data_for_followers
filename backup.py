@@ -47,11 +47,11 @@ class Followers:
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
                 photos and videos from xxx (@xxx)">
                 """
-                # getDescriptionElement = "meta[property='og:description']"
-                # print(f"Waiting for element: {getDescriptionElement}")
+                getDescriptionElement = "meta[property='og:description']"
+                print(f"Waiting for element: {getDescriptionElement}")
                 getDescriptionTag = wait.until(
                     ec.presence_of_element_located(
-                        (By.XPATH, "//meta[@property='og:description']")))
+                        (By.CSS_SELECTOR, getDescriptionElement)))
                 print(f"{getDescriptionTag}")
                 getContent = getDescriptionTag.get_attribute("content")
                 """
@@ -73,11 +73,11 @@ class Followers:
                 og:title
                 <meta property="og:title" content="xxx(@xxx) • Instagram photos and videos">
                 """
-                # getTitleElement = "meta[property='og:title']"
-                # print(f"Waiting for element: {getTitleElement}")
+                getTitleElement = "meta[property='og:title']"
+                print(f"Waiting for element: {getTitleElement}")
                 getTitleTag = wait.until(
                     ec.presence_of_element_located(
-                        (By.XPATH, "//meta[@property='og:title']")))
+                        (By.CSS_SELECTOR, getTitleElement)))
                 name = getTitleTag.get_attribute(
                     "content").split("•")[0].strip()
 
