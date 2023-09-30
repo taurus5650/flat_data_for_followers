@@ -41,7 +41,7 @@ class Followers:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
 
                 # Wait for the element to be present
-                wait = WebDriverWait(initializeDriver, 10)
+                wait = WebDriverWait(initializeDriver, 30)
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
