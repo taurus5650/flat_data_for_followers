@@ -1,6 +1,7 @@
 import json
 import platform
 import time
+import requests
 
 from selenium import webdriver
 import undetected_chromedriver as uc
@@ -35,8 +36,22 @@ class Followers:
         intagramList = usersList.instagramUsersList()
         resultsList = []
 
-        print(initializeDriver.execute_script("return navigator.userAgent;"))
         initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
+
+
+        # Make a GET request
+        response = requests.get('https://www.instagram.com/cheer_groupies')
+
+        # Check the status code
+        status_code = response.status_code
+        print(f'Status Code: {status_code}')
+
+        # Check if the request was successful (status code 200)
+        if response.status_code == 200:
+            print('Request was successful')
+        else:
+            print('Request was not successful')
+
         print(initializeDriver.execute_script("return navigator.userAgent;"))
         html_source = initializeDriver.page_source
         with open("page_source.html", "w", encoding="utf-8") as file:
