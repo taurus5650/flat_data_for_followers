@@ -34,9 +34,10 @@ class Followers:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
                 print(f"Page loaded for user: {usersInfo}")
+                print(initializeDriver.page_source)
 
                 # Wait for the element to be present
-                wait = WebDriverWait(initializeDriver, 120)
+                wait = WebDriverWait(initializeDriver, 300)
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
@@ -88,7 +89,8 @@ class Followers:
             self.saveToJson(resultsList)
 
         except Exception as e:
-            raise ValueError(f"Couldn't retrieve information for {intagramList}: {e}")
+            raise ValueError(
+                f"Couldn't retrieve information for {intagramList}: {e}")
 
         finally:
             initializeDriver.quit()
