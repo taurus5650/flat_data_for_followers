@@ -34,7 +34,6 @@ class Followers:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
                 print(f"Page loaded for user: {usersInfo}")
-                print(initializeDriver.page_source)
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 300)
@@ -48,6 +47,7 @@ class Followers:
                 getDescriptionTag = wait.until(
                     ec.presence_of_element_located(
                         (By.CSS_SELECTOR, getDescriptionElement)))
+                print (f"{getDescriptionTag}")
                 getContent = getDescriptionTag.get_attribute("content")
                 """
                 getContent.split(", ") = When ", ", then do split
