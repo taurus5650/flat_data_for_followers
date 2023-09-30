@@ -25,14 +25,6 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'
-      - name: Installing package list
-        run: apt list --installed
-      - name: Removing previous chrome instances on runner
-        run: sudo apt purge google-chrome-stable
-      - name: Installing all necessary packages
-        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
-      - name: Install xvfb
-        run: sudo apt-get install xvfb
       - name: Install Python dependencies
         run: |
           python -m venv venv
@@ -40,6 +32,10 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install -r requirements.txt
           pip3 list
+          apt list --installed
+          sudo apt purge google-chrome-stable
+          pip install chromedriver-autoinstaller selenium pyvirtualdisplay
+          sudo apt-get install xvfb
       - name: Run followers.py
         run: |
           source venv/bin/activate
