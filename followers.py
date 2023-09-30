@@ -1,9 +1,7 @@
 import json
-import re
 import platform
-import time
+import re
 
-from selenium import webdriver
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
