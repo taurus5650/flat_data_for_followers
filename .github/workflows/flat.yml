@@ -32,10 +32,6 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install -r requirements.txt
           pip3 list
-          apt list --installed
-          sudo apt purge google-chrome-stable
-          pip install chromedriver-autoinstaller selenium pyvirtualdisplay
-          sudo apt-get install xvfb
       - name: Run followers.py
         run: |
           source venv/bin/activate
