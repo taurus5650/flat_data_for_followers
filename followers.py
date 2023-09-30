@@ -13,16 +13,16 @@ class Followers:
 
     def initializeDriver(self):
         options = uc.ChromeOptions()
-        options.add_argument("--headless")
+        options.add_argument("--headless=new")
+        options.add_argument("enable-automation")
         options.add_argument("--no-sandbox")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--dns-prefetch-disable")
         options.add_argument("--disable-gpu")
-        options.add_argument(
-            "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-
-        chromeVersion = "91.0.4472.124"
-        chromeDriverPath = ChromeDriverManager().install()
-        service = Service(chromeDriverPath)
-        driver = uc.Chrome(service=service, options=options)
+        driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
+        # options = uc.ChromeOptions()
+        # options.add_argument("--headless=new")
+        # driver = uc.Chrome(options=options, version_main=117)
         return driver
 
     def saveToJson(self, resultsList):
