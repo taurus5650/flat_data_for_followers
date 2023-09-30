@@ -14,21 +14,14 @@ from users_list import UserList
 class Followers:
 
     def initializeDriver(self):
-        # options = uc.ChromeOptions()
-        # options.add_argument("--headless=new")
-        # options.add_argument("enable-automation")
-        # options.add_argument("--no-sandbox")
-        # options.add_argument("--disable-extensions")
-        # options.add_argument("--dns-prefetch-disable")
-        # options.add_argument("--disable-gpu")
-        # driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
-
-        options = webdriver.FirefoxOptions()
-        options.add_argument("--headless")
+        options = uc.ChromeOptions()
+        options.add_argument("--headless=new")
+        options.add_argument("enable-automation")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--dns-prefetch-disable")
         options.add_argument("--disable-gpu")
-
-        # 如果需要设置 geckodriver 的路径，可以使用 executable_path 参数
-        driver = webdriver.Firefox(options=options)
+        driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
 
         return driver
 
@@ -49,7 +42,6 @@ class Followers:
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
-                initializeDriver.execute_script("return document.readyState == 'complete'")
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
