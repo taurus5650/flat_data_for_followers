@@ -40,6 +40,9 @@ class Followers:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
                 print(f"Page loaded for user: {usersInfo}")
 
+                html_source = initializeDriver.page_source
+                print(html_source)
+
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
                 """
