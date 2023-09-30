@@ -30,15 +30,15 @@ class Followers:
         with open('data.json', 'w', encoding='utf-8') as json_file:
             json.dump(resultsList, json_file, ensure_ascii=False, indent=4)
 
-    def convertToNumeric(self, value_str):
+    def convertToNumeric(self, valueStr):
         # Use regular expression to extract numeric values and suffixes (e.g., K, M)
-        match = re.match(r'(\d+(\.\d+)?)\s*([KkMm]*)', value_str)
+        match = re.match(r'(\d+(\.\d+)?)\s*([KkMm]*)', valueStr)
         if match:
             value, _, suffix = match.groups()
             multiplier = {'k': 1000, 'm': 1000000}.get(suffix.lower(), 1)
             return int(float(value) * multiplier)
         else:
-            return int(value_str)
+            return int(valueStr)
 
     def getUserInfo(self):
         initializeDriver = self.initializeDriver()
@@ -49,30 +49,20 @@ class Followers:
         try:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
-                print(f"Page loaded for user: {usersInfo}")
 
-                # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
 
                 getDescriptionElement = "meta[property='og:description']"
-                print(f"Waiting for element: {getDescriptionElement}")
                 getDescriptionTag = wait.until(
-                    ec.presence_of_element_located(
-                        (By.CSS_SELECTOR, getDescriptionElement)))
-                print(f"{getDescriptionTag}")
+                    ec.presence_of_element_located((By.CSS_SELECTOR, getDescriptionElement)))
                 getContent = getDescriptionTag.get_attribute("content")
 
                 stats = getContent.split(", ")
-                followers, following, posts = map(
-                    self.convertToNumeric(), [stat.split(" ")[0] for stat in stats])
+                followers, following, posts = map(self.convertToNumeric, [stat.split(" ")[0] for stat in stats])
 
                 getTitleElement = "meta[property='og:title']"
-                print(f"Waiting for element: {getTitleElement}")
-                getTitleTag = wait.until(
-                    ec.presence_of_element_located(
-                        (By.CSS_SELECTOR, getTitleElement)))
-                name = getTitleTag.get_attribute(
-                    "content").split("•")[0].strip()
+                getTitleTag = wait.until(ec.presence_of_element_located((By.CSS_SELECTOR, getTitleElement)))
+                name = getTitleTag.get_attribute("content").split("•")[0].strip()
 
                 results = {
                     "name": name,
@@ -87,8 +77,7 @@ class Followers:
             self.saveToJson(resultsList)
 
         except Exception as e:
-            raise ValueError(
-                f"Couldn't retrieve information for {intagramList}: {e}")
+            raise ValueError(f"Couldn't retrieve information for {intagramList}: {e}")
 
         finally:
             initializeDriver.quit()

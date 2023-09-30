@@ -2,11 +2,16 @@
 class UserList:
     def instagramUsersList(self):
         instagramUsersList = [
-            "sodagreen_aka_oaeen",
-            "cheer_groupies",
-            "imqingfeng",
-            "wenfang_",
-            "chua.tanya",
-            "stefsunyanzi"
+            "taylorswift",
+            "justinbieber",
+            "avrillavigne",
+            "ladygaga",
+            "beyonce",
+            "katyperry",
+            "adele",
+            "teddysphotos",
+            "billieeilish",
+            "badgalriri",
+            "nickiminaj",
         ]
         return instagramUsersList
