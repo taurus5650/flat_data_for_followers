@@ -12,18 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-      - name: Install dependencies
-        run: pip install -r requirements.txt
+          cache: 'pip'
+      - run: pip install -r requirements.txt
       - name: Pulling API progress
         run: |
           export PYTHONPATH=.:$PYTHONPATH
           python3 ./followers.py
       - name: Patching changes progress
         run: |
-          now=$(date)
+          now=`date`
           git config --global user.name taurus5650
           git add .
           git commit -m "[bot] patching progress at ${now}" || echo 'Nothing to commit'
