@@ -41,6 +41,11 @@ class Followers:
                 print(f"Page loaded for user: {usersInfo}")
 
                 html_source = initializeDriver.page_source
+                print (f"""
+                --- ---
+                {html_source}
+                --- ---
+                """)
 
                 with open("page_source.html", "w", encoding="utf-8") as file:
                     file.write(html_source)
