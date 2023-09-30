@@ -35,7 +35,7 @@ class Followers:
         intagramList = usersList.instagramUsersList()
         resultsList = []
 
-        okk = initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
+        okk = initializeDriver.get(f"https://www.instagram.com/cheer_groupies")
         html_source = okk.page_source
         print(f"""
                --- ---
