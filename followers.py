@@ -2,6 +2,7 @@ import json
 import platform
 import time
 
+from selenium import webdriver
 import undetected_chromedriver as uc
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as ec
@@ -13,15 +14,22 @@ from users_list import UserList
 class Followers:
 
     def initializeDriver(self):
-        options = uc.ChromeOptions()
-        options.add_argument("--headless=new")
-        options.add_argument("enable-automation")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--dns-prefetch-disable")
+        # options = uc.ChromeOptions()
+        # options.add_argument("--headless=new")
+        # options.add_argument("enable-automation")
+        # options.add_argument("--no-sandbox")
+        # options.add_argument("--disable-extensions")
+        # options.add_argument("--dns-prefetch-disable")
+        # options.add_argument("--disable-gpu")
+        # driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
+
+        options = webdriver.FirefoxOptions()
+        options.add_argument("--headless")
         options.add_argument("--disable-gpu")
-        driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
-        time.sleep(5)
+
+        # 如果需要设置 geckodriver 的路径，可以使用 executable_path 参数
+        driver = webdriver.Firefox(options=options)
+
         return driver
 
     def saveToJson(self, resultsList):
