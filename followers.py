@@ -50,7 +50,7 @@ class Followers:
                 getDescriptionTag = wait.until(
                     ec.presence_of_element_located(
                         (By.CSS_SELECTOR, getDescriptionElement)))
-                print (f"{getDescriptionTag}")
+                print(f"{getDescriptionTag}")
                 getContent = getDescriptionTag.get_attribute("content")
                 """
                 getContent.split(", ") = When ", ", then do split

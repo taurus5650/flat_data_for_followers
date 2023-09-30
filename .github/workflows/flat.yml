@@ -24,15 +24,15 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
+          architecture: "x64"
       - name: Install Python dependencies
         run: |
-          python -m venv venv
+          python3 -m venv venv
           source venv/bin/activate
-          pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Check Installed Modules
-        run: pip3 list
+          pip3 install --upgrade pip
+          pip3 install -r requirements.txt
+          pip3 list
       - name: Pulling API progress
         run: |
           python3 ./followers.py
