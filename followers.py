@@ -35,20 +35,18 @@ class Followers:
         intagramList = usersList.instagramUsersList()
         resultsList = []
 
+        okk = initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
+        html_source = okk.page_source
+        print(f"""
+               --- ---
+               {html_source}
+                --- ---
+               """)
+
         try:
             for usersInfo in intagramList:
                 initializeDriver.get(f"https://www.instagram.com/{usersInfo}")
                 print(f"Page loaded for user: {usersInfo}")
-
-                html_source = initializeDriver.page_source
-                print (f"""
-                --- ---
-                {html_source}
-                --- ---
-                """)
-
-                with open("page_source.html", "w", encoding="utf-8") as file:
-                    file.write(html_source)
 
                 # Wait for the element to be present
                 wait = WebDriverWait(initializeDriver, 20)
