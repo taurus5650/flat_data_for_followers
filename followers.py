@@ -16,36 +16,15 @@ import platform
 class Followers:
 
     def initializeDriver(self):
-        # options = uc.ChromeOptions()
-        # options.add_argument("--headless=new")
-        # options.add_argument("enable-automation")
-        # options.add_argument("--no-sandbox")
-        # options.add_argument("--disable-extensions")
-        # options.add_argument("--dns-prefetch-disable")
-        # options.add_argument("--disable-gpu")
-        # driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
-
-        chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
-        chrome_options = webdriver.ChromeOptions()
-        # Add your options as needed
-        options = [
-            # Define window size here
-            "--window-size=1200,1200",
-            "--ignore-certificate-errors"
-            "--headless",
-            "--disable-gpu",
-            "--no-sandbox",
-            # "--window-size=1920,1200",
-            # "--ignore-certificate-errors",
-            # "--disable-extensions",
-            # "--disable-dev-shm-usage",
-            # '--remote-debugging-port=9222'
-        ]
-
-        for option in options:
-            chrome_options.add_argument(option)
-
-        driver = webdriver.Chrome(options=chrome_options)
+        options = uc.ChromeOptions()
+        options.add_argument("--headless=new")
+        options.add_argument("enable-automation")
+        options.add_argument("--no-sandbox")
+        options.add_argument("--disable-extensions")
+        options.add_argument("--dns-prefetch-disable")
+        options.add_argument("--disable-gpu")
+        driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
+        time.sleep(5)
         return driver
 
     def saveToJson(self, resultsList):
@@ -64,7 +43,7 @@ class Followers:
                 print(f"Page loaded for user: {usersInfo}")
 
                 # Wait for the element to be present
-                wait = WebDriverWait(initializeDriver, 30)
+                wait = WebDriverWait(initializeDriver, 20)
                 """
                 og:description
                 <meta property="og:description" content="40K Followers, 138 Following, 32 Posts - See Instagram
