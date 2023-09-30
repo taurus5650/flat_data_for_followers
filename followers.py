@@ -5,6 +5,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from users_list import UserList
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+import chromedriver_autoinstaller
 import json
 import platform
 
@@ -12,17 +16,37 @@ import platform
 class Followers:
 
     def initializeDriver(self):
-        options = uc.ChromeOptions()
-        options.add_argument("--headless=new")
-        options.add_argument("enable-automation")
-        options.add_argument("--no-sandbox")
-        options.add_argument("--disable-extensions")
-        options.add_argument("--dns-prefetch-disable")
-        options.add_argument("--disable-gpu")
-        driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
         # options = uc.ChromeOptions()
         # options.add_argument("--headless=new")
-        # driver = uc.Chrome(options=options, version_main=117)
+        # options.add_argument("enable-automation")
+        # options.add_argument("--no-sandbox")
+        # options.add_argument("--disable-extensions")
+        # options.add_argument("--dns-prefetch-disable")
+        # options.add_argument("--disable-gpu")
+        # driver = uc.Chrome(options=options, version_main=117, enable_cdp_events=True, headless=True)
+
+        chromedriver_autoinstaller.install()  # Check if the current version of chromedriver exists
+        chrome_options = webdriver.ChromeOptions()
+        # Add your options as needed
+        options = [
+            # Define window size here
+            "--window-size=1200,1200",
+            "--ignore-certificate-errors"
+
+            # "--headless",
+            # "--disable-gpu",
+            # "--window-size=1920,1200",
+            # "--ignore-certificate-errors",
+            # "--disable-extensions",
+            # "--no-sandbox",
+            # "--disable-dev-shm-usage",
+            # '--remote-debugging-port=9222'
+        ]
+
+        for option in options:
+            chrome_options.add_argument(option)
+
+        driver = webdriver.Chrome(options=chrome_options)
         return driver
 
     def saveToJson(self, resultsList):
