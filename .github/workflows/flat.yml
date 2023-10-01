@@ -32,15 +32,15 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install -r requirements.txt
           pip3 list
-          # python3 -m followers --debug
+          python3 -m followers --debug
       - name: Read data.json
         run: |
-          # Assuming data.json is in the root directory
           cat data.json
       - name: Patching changes progress
         run: |
           now=`date`
           git config --global user.name taurus5650
+          git config --global user.email "taurus_5650@hotmail.com"
           git add .
           git commit -m "[bot] patching progress at ${now}" || echo 'Nothing to commit'
-          git push || echo 'Nothing to push'
+          git push || echo 'Git PUSH'
